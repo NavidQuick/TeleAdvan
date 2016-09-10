@@ -84,7 +84,7 @@ local function unlock_group_photomod(msg, data, target)
   else
     data[tostring(target)]['settings']['lock_photo'] = 'no'
     save_data(_config.moderation.data, data)
-    return 'عکس گره آزاد شد'
+    return 'عکس گروه آزاد شد'
   end
 end
 
