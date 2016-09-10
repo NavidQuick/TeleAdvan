@@ -17,9 +17,9 @@ local function chat_list(msg)
     local data = load_data(_config.moderation.data)
         local groups = 'groups'
         if not data[tostring(groups)] then
-                return 'No groups at the moment'
+                return 'این گروه در لیست وجود ندارد.'
         end
-        local message = 'List of Groups:\n*ورود به گروه موردنظر: ورود آیدی*\n\n '
+        local message = 'لیست گروه ها : \n*ورود به گروه موردنظر: ورود آیدی*\n\n '
         for k,v in pairs(data[tostring(groups)]) do
                 local settings = data[tostring(v)]['settings']
                 for m,n in pairsByKeys(settings) do
@@ -47,8 +47,8 @@ local function run(msg, matches)
       if is_gbanned(msg.from.id) then
             return 'شما سوپر بن شده اید'
       end
-      if data[tostring(matches[2])]['settings']['lock_member'] == 'yes' and not is_owner2(msg.from.id, matches[2]) then
-        return 'Group is private.'
+      if data[tostring(matches[2])]['settings']['lock_member'] == '🔒' and not is_owner2(msg.from.id, matches[2]) then
+        return 'گروه شخصی است.'
       end
           local chat_id = "chat#id"..matches[2]
           local user_id = "user#id"..msg.from.id
@@ -81,10 +81,9 @@ return {
       "^(چت ها)$",
       "^(لیست چت ها)$",
       "^(ورود) (.*)$",
-      "^[/!](kickme) (.*)$",
+      "^(خروج از) (.*)$",
       "^!!tgservice (chat_add_user)$"
     },
     run = run,
 }
 end
-
